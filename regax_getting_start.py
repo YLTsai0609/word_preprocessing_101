@@ -190,41 +190,41 @@ print(type(s), s.group(), sep='\n')
 
 # 9.1. Any character except for a new line
 text = 'machinelearningplus.com'
-print(re.findall('.', text))
-print(re.findall('(...)', text))
+print(re.findall('.', text)) # match任何一個字元但不包含\n
+print(re.findall('(...)', text))  # match 任何三個字元但不包含\n
 
 # 9.2. A period
 text = 'machinelearningplus.com'
 text2 = 'abcabcabcabcabc'
-print(re.findall('\.', text))
-print(re.findall('[^\.]', text))
+print(re.findall('\.', text)) # match 點
+print(re.findall('[^\.]', text)) # match 不是點
 
 # 9.3. Any digit
 text = '01, Jan 2015'
-print(re.findall('[0-9]{2,}', text))
-print(re.findall('\d+', text))
+print(re.findall('[0-9]{2,}', text)) # match 任意數字0-9，兩個以上
+print(re.findall('\d+', text)) # match任意數字，1個以上
 
 # 9.4. Anything but a digit
 text = '01, Jan 2015'
-print(re.findall('\D+', text))
+print(re.findall('\D+', text)) # match任意非數字，1個以上
 
 # 9.5. Any character, including digits
 text = '01, Jan 2015'
-print(re.findall('[0-9A-Za-z]+', text))
-print(re.findall('\w+', text))
+print(re.findall('[0-9A-Za-z]+', text)) # match任意0-9, A-Z, a-z, 一個以上(不包含空白，所以就被切開了)
+print(re.findall('\w+', text)) # match任意字元，(不包含空白，所以就被切開了)
 
 # 9.6. Anything but a character
 text = '01, Jan 2015'
-print(re.findall('\W+', text))
+print(re.findall('\W+', text)) # match 任意非字元，所以就match到, 空白等
 
 # 9.7. Collection of characters
 text = '01, Jan 2015'
-print(re.findall('[a-zA-Z]+', text))
+print(re.findall('[a-zA-Z]+', text)) # match任意a-zA-Z，以個以上
 
 # 9.8. Match something upto ‘n’ times
 text = '01, Jan 2015'
-print(re.findall('\d{4}', text))
-print(re.findall('\d{2,4}', text))
+print(re.findall('\d{4}', text)) # match 任意數字，連續出現4個
+print(re.findall('\d{2,4}', text)) # match 任意數字，連續出現2~4個
 
 # 9.9. Match 1 or more occurrences
 print(re.findall(r'Co+l', 'So Coooooooool'))
@@ -243,7 +243,7 @@ print(re.findall('\section', '\section')) # will work
 
 # For example, the regex \btoy will match the ‘toy’ in ‘toy cat’ and not in ‘tolstoy’. In order to match the ‘toy’ in ‘tolstoy’, you should use toy\b
 
-re.findall(r'\btoy\b', 'play toy broke toys')
+re.findall(r'\btoy\b', 'play toy broke toys') # match toy單詞，前面和後面都以word boundary隔開
 
 
 # +
@@ -254,6 +254,7 @@ emails = """zuck26@facebook.com
 page33@google.com
 jeff42@amazon.com"""
 
+# match 任意字元，1個以上，小老鼠@任意字元一個以上，點.，任意A-Za-z，2到4個
 pat = re.compile(r'(\w+)@(\w+).([A-Za-z]{2,4})')
 re.findall(pat, emails)
 
@@ -351,5 +352,11 @@ text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685
 text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685380499_n.tiff" title="IMG_5208.png">'
 pat = re.compile('<img[^>]+src="([^">]+[jpg|png])"')
 pat.findall(text)
+# # Prefix
+#
 
+
+# https://blog.csdn.net/u013177568/article/details/62432737
+# r for raw
+# u for unicode
 
