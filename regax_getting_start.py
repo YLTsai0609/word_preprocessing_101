@@ -30,7 +30,7 @@
 # 11. Conclusion
 #
 
-import re   
+import re
 regex = re.compile('\s+')
 # \s match 任何空白字元
 # # + match 一個獲釋多個以上
@@ -41,7 +41,7 @@ regex = re.compile('\s+')
 
 text = """101 COM    Computers
 205 MAT   Mathematics
-189 ENG   English""" 
+189 ENG   English"""
 
 
 sol_1 = re.split('\s+', text)
@@ -58,14 +58,13 @@ print(sol_1, sol_2, sep='\n')
 # Let’s suppose you want to extract all the course numbers, that is, the numbers 101, 205 and 189 alone from the above text. How to do that?
 
 print(text)
-print('-'*60)
+print('-' * 60)
 regex_num = re.compile('\d+')
 regex_num.findall(text)
 
 # hint \d mean digit
 # # + means 一個或多個, * means 0個或多個
 # findall method 所有發生的情況, 加到list, 用於過濾字串
-
 
 
 # +
@@ -104,14 +103,14 @@ print(m)
 
 text = """101   COM \t  Computers
 205   MAT \t  Mathematics
-189   ENG  \t  English"""  
+189   ENG  \t  English"""
 print(text)
 
 
 # replace one or more spaces with single space
-sol1 = re.sub('\s+',' ', text)
+sol1 = re.sub('\s+', ' ', text)
 regex = re.compile('\s+')
-sol2 = regex.sub(' ',text)
+sol2 = regex.sub(' ', text)
 print(sol1, sol2, sep='\n')
 # -
 
@@ -130,7 +129,7 @@ print(regex.sub(' ', text))
 
 text = """101   COM   Computers
 205   MAT   Mathematics
-189   ENG    English"""  
+189   ENG    English"""
 
 # extract all course numbers
 print(re.findall('[0-9]+', text))
@@ -197,8 +196,8 @@ print(re.findall('(...)', text))
 # 9.2. A period
 text = 'machinelearningplus.com'
 text2 = 'abcabcabcabcabc'
-print(re.findall('\.',text))
-print(re.findall('[^\.]',text))
+print(re.findall('\.', text))
+print(re.findall('[^\.]', text))
 
 # 9.3. Any digit
 text = '01, Jan 2015'
@@ -229,7 +228,14 @@ print(re.findall('\d{2,4}', text))
 
 # 9.9. Match 1 or more occurrences
 print(re.findall(r'Co+l', 'So Coooooooool'))
-# r表示為非轉義肢原始字符，及忽略反斜槓
+# r表示為非轉譯之原始字符，及忽略反斜槓
+
+# 9.10 轉譯符號
+# 必須用\轉譯
+print(re.findall(r'\section', '\section')) # doesn't work
+print(re.findall(r'\\section', '\section')) # will work
+print(re.findall('\section', '\section')) # will work
+
 
 # +
 # # 9.12. Match word boundaries
@@ -254,7 +260,7 @@ re.findall(pat, emails)
 # +
 # 2. Retrieve all the words starting with ‘b’ or ‘B’ from the following text.
 
-text = """Betty bought a bit of butter, But the butter was so bitter, So she bought some better butter, To make the bitter butter better.""" 
+text = """Betty bought a bit of butter, But the butter was so bitter, So she bought some better butter, To make the bitter butter better."""
 print(re.findall(r'\bB\w+', text, flags=re.IGNORECASE))
 
 # -
@@ -267,46 +273,83 @@ sentence = """A, very   very; irregular_sentence"""
 # +
 # 4. Clean up the following tweet so that it contains only the user’s message. That is, remove all URLs, hashtags, mentions, punctuations, RTs and CCs.
 tweet = '''Good advice! RT @TheNextWeb: What I would do differently if I was learning to code today http://t.co/lbwej0pxOd cc: @garybernhardt #rstats'''
+
+
 def cleaning_text_eng(text):
     '''
     英文的清理和中文的清理會不同
     '''
-    tweet = re.sub(r'http\S+\s*','', text) # URLs http + 非空白一個以上 + 空白0個以上
-    tweet = re.sub(r'RT|cc','', tweet) # RT and CC
-    tweet = re.sub(r'#\S+','', tweet) # hashtag # + 非空白字元
-    tweet = re.sub(r'@\S+','', tweet) # hashtag @ + 非空白字元
+    tweet = re.sub(r'http\S+\s*', '', text)  # URLs http + 非空白一個以上 + 空白0個以上
+    tweet = re.sub(r'RT|cc', '', tweet)  # RT and CC
+    tweet = re.sub(r'#\S+', '', tweet)  # hashtag # + 非空白字元
+    tweet = re.sub(r'@\S+', '', tweet)  # hashtag @ + 非空白字元
     tweet = re.sub(r"""[%s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]""",
                    '',
-                   tweet) # 標點符號
-    tweet = re.sub(r'\s+',' ', tweet) # 額外的空白字元
+                   tweet)  # 標點符號
+    tweet = re.sub(r'\s+', ' ', tweet)  # 額外的空白字元
     tweet = tweet.strip()
     return tweet
+
 
 clean_tweet = cleaning_text_eng(tweet)
 clean_tweet
 # -
 
 import requests
-r = requests.get("https://raw.githubusercontent.com/selva86/datasets/master/sample.html")
+r = requests.get(
+    "https://raw.githubusercontent.com/selva86/datasets/master/sample.html")
 print(r.text)  # html text is contained here
+
+
 def split_from_tag(html_text):
     return re.findall(r'<.*>(.+)</.*>', html_text)
+
+
 split_from_tag(r.text)
 
 # extract P
-r = requests.get("https://raw.githubusercontent.com/selva86/datasets/master/sample.html")
+r = requests.get(
+    "https://raw.githubusercontent.com/selva86/datasets/master/sample.html")
 print(r.text)  # html text is contained here
+
+
 def split_from_tag(html_text):
     return re.findall(r'<P>(.+)</P>', html_text)
+
+
 split_from_tag(r.text)
 
 text = """python清理數據，僅保留字母，數字，中文，在前面加'ur'
           u的意思是表明後面有Unicode字符，漢字的範圍為'\u4e00-\i9fa5
           這個是用Unicode表示的"""
+
+
 def remove_punctuation(text):
     rule = re.compile(r"[^a-zA-Z0-9\u4e00-\u9fa5]")
-    result = rule.sub('',text)
+    result = rule.sub('', text)
     return result
+
+
 remove_punctuation(text)
+
+# print(text)
+
+
+# extract img source in html plain text
+# https://stackoverflow.com/questions/1028362/how-do-i-extract-html-img-sources-with-a-regular-expression/1028370
+# regax 解釋
+# 擷取以`<img`
+# 開頭配對一個或是多個 []+
+# 並且非右鍵號 [^>]+
+# 直到遇到src="
+# 拿取裡面的
+with open('data/webpage_1.txt') as f:
+    text = f.read()
+# print(text)
+# add the other extension(like png, tiff, ...)
+text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685380499_n.png" title="IMG_5208.png">'
+text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685380499_n.tiff" title="IMG_5208.png">'
+pat = re.compile('<img[^>]+src="([^">]+[jpg|png])"')
+pat.findall(text)
 
 
