@@ -2,7 +2,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py:light
+#     formats: py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
@@ -350,7 +350,7 @@ with open('data/webpage_1.txt') as f:
 # add the other extension(like png, tiff, ...)
 text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685380499_n.png" title="IMG_5208.png">'
 text += '<img alt="IMG_5208.png" src="https://pic.pimg.tw/happy78/1528543947-685380499_n.tiff" title="IMG_5208.png">'
-pat = re.compile('<img[^>]+src="([^">]+[jpg|png])"')
+pat = re.compile('<img[^>]+src="([^">]+(jpg|png))"')
 pat.findall(text)
 # # Prefix
 #
@@ -359,4 +359,28 @@ pat.findall(text)
 # https://blog.csdn.net/u013177568/article/details/62432737
 # r for raw
 # u for unicode
+
+
+# # Unicode category
+#
+# [wiki](https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F#Unicode%E5%A4%84%E7%90%86)
+#
+# [Unicode與規則表示式](https://www.ithome.com.tw/voice/127180)
+#
+# 兩種字元編碼，在正則表達式中都稱為預定義字元類(Predefined character class)
+#
+#
+# ASCII - 全世界第一版字元編碼，把數字轉成文字，只有英文(a to z, A to Z, 0 to (, .+-*&^%, ...)
+#
+# Unicode - 定義了近乎全世界的字元編碼，也被稱為萬國碼，由於全世界的文字實在太多，該編碼也不是使用數字來編碼，而是用Unicode碼點(Code Point)，例如 : `U+3000`
+#
+# Unicode分類、文字、區塊
+#
+# 在
+
+s = "å"
+# print(s.encode('utf-8'))
+result = re.findall(r"å",s)
+result
+
 
