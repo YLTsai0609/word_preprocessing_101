@@ -1,3 +1,3 @@
-[submodule "tokenizer/jieba-tw"]
-	path = tokenizer/jieba-tw
+[submodule "tokenizer/jieba_tw"]
+	path = tokenizer/jieba_tw
 	url = https://github.com/APCLab/jieba-tw.git
