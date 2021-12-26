@@ -14,6 +14,11 @@
 #     name: python3
 # ---
 
+# + [markdown] toc=true
+# <h1>Table of Contents<span class="tocSkip"></span></h1>
+# <div class="toc"><ul class="toc-item"><li><span><a href="#Contents" data-toc-modified-id="Contents-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Contents</a></span></li><li><span><a href="#Unicode-category" data-toc-modified-id="Unicode-category-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Unicode category</a></span></li></ul></div>
+# -
+
 # # Contents
 # 1. Introduction to regular expressions
 # 2. What is a regex pattern and how to compile one?
